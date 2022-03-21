@@ -24,8 +24,12 @@ jobs:
         command: |-
           cd selenium
           bazel build //dotnet/src/webdriver:package
+    - run:
+        command: |-
+          mkdir artifacts
+          Get-ChildItem -Path "selenium\bazel-bin\dotnet\src\webdriver\*" -Include *.nupkg,*.snupkg | Copy-Item -Destination artifacts\
     - store_artifacts:
-          path: selenium/bazel-bin/dotnet/src/webdriver
+          path: artifacts\
 
 workflows:
   build-latest-selenium:
