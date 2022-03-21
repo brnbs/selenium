@@ -25,7 +25,7 @@ jobs:
           cd selenium
           bazel build //dotnet/src/webdriver:package
     - store_artifacts:
-          path: bazel-bin/dotnet/src/webdriver
+          path: selenium/bazel-bin/dotnet/src/webdriver
 
 workflows:
   build-latest-selenium:
