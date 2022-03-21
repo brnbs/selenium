@@ -33,4 +33,6 @@ workflows:
   build-latest-selenium:
     jobs:
       - install-tools
-      - build-selenium
+      - build-selenium:
+          requires:
+            - install-tools
