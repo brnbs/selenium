@@ -23,7 +23,7 @@ jobs:
       name: win/default
     steps:
     - run:
-        command: git clone --depth 1 "$CIRCLE_REPOSITORY_URL" --branch "$CIRCLE_BRANCH"
+        command: git clone --depth 1 "$env:CIRCLE_REPOSITORY_URL" --branch "$env:CIRCLE_BRANCH"
     - run:
         command: |-
           cd selenium
