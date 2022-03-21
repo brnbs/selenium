@@ -4,12 +4,10 @@ orbs:
   win: circleci/windows@2.2.0
 
 jobs:
-  install-tools:
+  install-tools-and-build:
     executor:
       name: win/default
     steps:
-    - run:
-        command: choco install git -y
     - run:
         command: choco install openjdk11 -y
     - run:
@@ -18,10 +16,6 @@ jobs:
         command: choco install msys2 -y --params "/InstallDir=C:\tools\msys64"
     - run:
         command: choco install bazel -y
-  build-selenium:
-    executor:
-      name: win/default
-    steps:
     - run:
         command: git clone --depth 1 https://github.com/SeleniumHQ/selenium.git --branch trunk
     - run:
@@ -32,7 +26,4 @@ jobs:
 workflows:
   build-latest-selenium:
     jobs:
-      - install-tools
-      - build-selenium:
-          requires:
-            - install-tools
+      - install-tools-and-build
