@@ -23,7 +23,7 @@ jobs:
     - run:
         command: |-
           cd selenium
-          bazel build //dotnet/src/webdriver:package
+          bazel build --jobs=2 //dotnet/src/webdriver:package
     - run:
         command: |-
           mkdir artifacts
