@@ -24,9 +24,8 @@ jobs:
         command: |-
           cd selenium
           bazel build //dotnet/src/webdriver:package
-          $line = Select-String -Path .\dotnet\selenium-dotnet-version.bzl -Pattern "SE_VERSION"
-          $env:VERSION = [regex]::matches($line,'(?<=\").+?(?=\")').value
-          ~\go\bin\ghr.exe -t $env:GITHUB_TOKEN -u $env:CIRCLE_PROJECT_USERNAME -r $env:CIRCLE_PROJECT_REPONAME -c $env:CIRCLE_SHA1 -soft $env:VERSION bazel-bin/dotnet/src/webdriver/*.nupkg
+    - store_artifacts:
+          path: bazel-bin/dotnet/src/webdriver
 
 workflows:
   build-latest-selenium:
