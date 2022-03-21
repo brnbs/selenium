@@ -21,7 +21,7 @@ jobs:
     - run:
         command: |-
           cd selenium
-          bazel build //dotnet/test/common:chrome
+          bazel build //dotnet/src/webdriver:package
 
 workflows:
   build-latest-selenium:
