@@ -23,7 +23,7 @@ jobs:
       name: win/default
     steps:
     - run:
-        command: git clone --depth 1 "$env:CIRCLE_REPOSITORY_URL" --branch "$env:CIRCLE_BRANCH"
+        command: git clone --depth 1 https://github.com/SeleniumHQ/selenium.git --branch trunk
     - run:
         command: |-
           cd selenium
