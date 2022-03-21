@@ -15,8 +15,6 @@ jobs:
     - run:
         command: choco install msys2 -y --params "/InstallDir=C:\tools\msys64"
     - run:
-        command: "[System.Environment]::SetEnvironmentVariable('BAZEL_SH', 'C:\\tools\\msys64\\usr\\bin\\bash.exe', [System.EnvironmentVariableTarget]::User)"
-    - run:
         command: choco install bazel --version 4.2.2 -y
     - run:
         command: git clone --depth 1 https://github.com/SeleniumHQ/selenium.git --branch trunk
