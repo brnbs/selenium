@@ -22,12 +22,14 @@ jobs:
     - run:
         command: |-
           cd selenium
-          ((Get-Content -path dotnet\src\webdriver\WebDriver.csproj -Raw) -replace 'Selenium.WebDriver', 'OutisNemo.Selenium.WebDriver') | Set-Content -Path dotnet\src\webdriver\WebDriver.csproj
-          bazel build --jobs=2 //dotnet/src/webdriver:package
+          ((Get-Content -path dotnet\src\webdriver\WebDriver.nuspec -Raw) -replace '$packageid$', 'OutisNemo.Selenium.WebDriver') | Set-Content -Path dotnet\src\webdriver\WebDriver.nuspec
+          ((Get-Content -path dotnet\src\support\WebDriver.Support.nuspec -Raw) -replace 'Selenium.WebDriver', 'OutisNemo.Selenium.WebDriver') | Set-Content -Path dotnet\src\support\WebDriver.Support.nuspec
+          bazel build --jobs=2 //dotnet/src/webdriver:package //dotnet/src/support:package
     - run:
         command: |-
           mkdir artifacts
           Get-ChildItem -Path "selenium\bazel-bin\dotnet\src\webdriver\*" -Include *.nupkg,*.snupkg | Copy-Item -Destination artifacts\
+          Get-ChildItem -Path "selenium\bazel-bin\dotnet\src\support\*" -Include *.nupkg,*.snupkg | Copy-Item -Destination artifacts\
     - store_artifacts:
           path: artifacts\
 
