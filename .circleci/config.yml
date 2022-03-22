@@ -14,8 +14,8 @@ jobs:
         command: choco install openjdk11 -y
     - run:
         command: choco install python -y
-    - run:
-        command: choco install msys2 -y --params "/InstallDir=C:\tools\msys64"
+    #- run:
+    #    command: choco install msys2 -y --params "/InstallDir=C:\tools\msys64"
     - run:
         command: choco install bazel --version 4.2.2 -y
     - run:
@@ -23,7 +23,8 @@ jobs:
     - run:
         command: |-
           cd selenium
-          bazel build --jobs=2 //dotnet/src/webdriver:package
+          ((Get-Content -path dotnet\src\support\BUILD.bazel -Raw) -replace 'Selenium.Support', 'OutisNemo.Selenium.Support') | Set-Content -Path dotnet\src\support\BUILD.bazel
+          bazel build --jobs=2 //dotnet/src/support:package
     - run:
         command: |-
           mkdir artifacts
