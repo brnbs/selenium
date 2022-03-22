@@ -22,7 +22,7 @@ jobs:
     - run:
         command: |-
           cd selenium
-          ((Get-Content -path dotnet\src\webdriver\BUILD.bazel -Raw) -replace 'Selenium.WebDriver', 'OutisNemo.Selenium.WebDriver') | Set-Content -Path dotnet\src\webdriver\BUILD.bazel
+          ((Get-Content -path dotnet\src\webdriver\WebDriver.csproj -Raw) -replace 'Selenium.WebDriver', 'OutisNemo.Selenium.WebDriver') | Set-Content -Path dotnet\src\webdriver\WebDriver.csproj
           bazel build --jobs=2 //dotnet/src/webdriver:package
     - run:
         command: |-
