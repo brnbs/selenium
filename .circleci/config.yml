@@ -22,8 +22,10 @@ jobs:
     - run:
         command: |-
           cd selenium
-          ((Get-Content -path dotnet\src\webdriver\WebDriver.nuspec -Raw) -replace '$packageid$', 'OutisNemo.Selenium.WebDriver') | Set-Content -Path dotnet\src\webdriver\WebDriver.nuspec
+          ((Get-Content -path dotnet\src\webdriver\BUILD.bazel -Raw) -replace '"Selenium.WebDriver"', '"OutisNemo.Selenium.WebDriver"') | Set-Content -Path dotnet\src\webdriver\BUILD.bazel
+          ((Get-Content -path dotnet\src\support\BUILD.bazel -Raw) -replace '"Selenium.Support"', '"OutisNemo.Selenium.Support"') | Set-Content -Path dotnet\src\support\BUILD.bazel
           ((Get-Content -path dotnet\src\support\WebDriver.Support.nuspec -Raw) -replace 'Selenium.WebDriver', 'OutisNemo.Selenium.WebDriver') | Set-Content -Path dotnet\src\support\WebDriver.Support.nuspec
+          ((Get-Content -path dotnet\selenium-dotnet-version.bzl -Raw) -replace 'Selenium Committers', 'Selenium Committers and Outis Nemo') | Set-Content -Path dotnet\selenium-dotnet-version.bzl
           bazel build --jobs=2 //dotnet/src/webdriver:package //dotnet/src/support:package
     - run:
         command: |-
