@@ -15,10 +15,11 @@ jobs:
     - run:
         command: choco install bazel --version 4.2.2 -y
     - run:
-        command: |-
-          git clone --depth 10 https://github.com/SeleniumHQ/selenium.git --branch trunk
-          cd selenium
-          git reset --hard 447ab1f
+        #command: |-
+        #  git clone --depth 10 https://github.com/SeleniumHQ/selenium.git --branch trunk
+        #  cd selenium
+        #  git reset --hard 447ab1f
+        command: git clone --depth 1 https://github.com/SeleniumHQ/selenium.git --branch trunk
     - run:
         command: |-
           cd selenium
