@@ -33,6 +33,10 @@ jobs:
           mkdir artifacts
           Get-ChildItem -Path "selenium\bazel-bin\dotnet\src\webdriver\*" -Include *.nupkg,*.snupkg | Copy-Item -Destination artifacts\
           Get-ChildItem -Path "selenium\bazel-bin\dotnet\src\support\*" -Include *.nupkg,*.snupkg | Copy-Item -Destination artifacts\
+    - run:
+        command: |-
+          cd artifacts
+          dotnet nuget push *.nupkg --api-key ${env:NEXUS_API_KEY} --source ${env:NEXUS_URL}
     - store_artifacts:
           path: artifacts\
 
